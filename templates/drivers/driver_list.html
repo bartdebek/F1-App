@@ -1,16 +1,20 @@
+{% extends 'base.html' %}
+
 {% load static %}
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% block content %}
+{% if user.is_authenticated %}
+<p>Hi {{ user.email }}!</p>
+<p><a href="{% url 'logout' %}">Log Out</a></p>
+{% else %}
+<p>You are not logged in</p>
+<a href="{% url 'login' %}">Log In</a>
+<a href="{% url 'signup' %}">Sign Up</a>
+{% endif %}
+<h1>List of current F1 drivers and champions from the past:</h1>
     {% for driver in driver_list %}
     <h2>{{ driver }}</h2>{{ driver.nationality }}<img src="{{ driver.get_flag.url}}" height="20px">
     <h2>{{ driver.team }}<img src="{{ driver.get_logo.url }}" height="20px"></h2>
     {% endfor %}
-</body>
-</html>
+
+{% endblock content%}
