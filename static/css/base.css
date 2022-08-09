@@ -1,0 +1,22 @@
+.img-thumbnail {
+  object-fit: scale-down;
+  height: 200px;
+}
+
+.get-date {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: small;
+}
+
+.blog-post {
+  width: 75%;
+  text-align: justify;
+}
+
+.list-view {
+  padding: 50px;
+}
+
+.small-logo {
+  height: 20px;
+}
