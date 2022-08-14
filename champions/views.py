@@ -1,5 +1,9 @@
 from lib2to3.pgen2.driver import Driver
-from django.views.generic import ListView, TemplateView
+from django.views.generic import (
+    ListView, 
+    TemplateView, 
+    DetailView,
+)
 
 from .models import Driver
 
@@ -11,3 +15,7 @@ class DriversListView(ListView):
 
 class AboutPageView(TemplateView):
     template_name = 'about.html'
+
+class DriversDetailView(DetailView):
+    model = Driver
+    template_name = 'drivers/driver_detail.html'

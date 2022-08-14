@@ -1,5 +1,5 @@
 .img-thumbnail {
-  object-fit: scale-down;
+  object-fit: cover;
   height: 200px;
 }
 
@@ -19,4 +19,8 @@
 
 .small-logo {
   height: 20px;
+}
+
+.small-team-logo {
+  height: 30px;
 }
