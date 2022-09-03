@@ -11,16 +11,20 @@
     {% for driver in driver_list %}
     {% if forloop.counter0|divisibleby:3 %} <div class="row"> {%  endif %}
 
-    <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
-        <img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}">
-        <h5 class="card-title" align="center">{{ driver }}</h5>
-        <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
-        <h5 class="card-title" align="center">Most known from: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
-        <div class="card-footer" align="center">
-          <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
+    <div class="col-sm">
+      <div class="card-deck">
+        <div class="card" style="width: 18rem;">
+          <img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}">
+            <div class="card-body">
+              <h5 class="card-title" align="center">{{ driver }}</h5>
+              <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
+              <h5 class="card-title" align="center">Team: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+            </div>
+            <div class="card-footer" align="center">
+              <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
+            </div>
         </div>
-    </div>
+      </div>
     </div>
 
     {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}

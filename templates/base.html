@@ -37,14 +37,14 @@
                         </ul>
                     {% if user.is_authenticated %}
                     <li>
-                        <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Log Out</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'account_logout' %}">Log Out</a>
                     </li>
                     {% else %}
                     <li>
-                        <a class="nav-link" aria-current="page" href="{% url 'login' %}">Sign In</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'account_login' %}">Sign In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{% url 'signup' %}">Sign Up</a>
+                        <a class="nav-link" aria-current="page" href="{% url 'account_signup' %}">Sign Up</a>
                     </li>
                     {% endif %}
                     </li>
