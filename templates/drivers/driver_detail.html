@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% load ratings %}
+
+{% block content %}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-3 mx-auto" style="width: 20rem;">
+                <img src="{{driver.photo.url}}" class="card-img-top" alt="{{ driver }}">
+                <div class="card-body">
+                    <h5 class="card-title" align="center">{{ driver }}</h5>
+                    <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
+                    <h5 class="card-title" align="center">Most known from: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+                    <div class="card-footer" align="center">
+                    <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
+                    {% if driver.date_of_death %}
+                    <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
+                    {% else %}
+                    <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="rating">
+                {% ratings object %}
+            </div>
+        </div>
+    </div>
+</div>
+      
+{% endblock content%}

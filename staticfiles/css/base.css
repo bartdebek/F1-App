@@ -19,4 +19,13 @@
 
 .small-logo {
   height: 20px;
+  object-fit: cover;
+}
+
+.profile-pic {
+  object-fit: cover;
+}
+
+.rating {
+  margin-top: 200px;
 }
