@@ -1,4 +1,5 @@
-from django.urls import path
+from django.shortcuts import redirect
+from django.urls import path, include
 from .views import (
     AboutPageView, 
     DriversListView, 
@@ -11,6 +12,7 @@ from .views import (
 
 
 urlpatterns = [
+    path('', lambda request: redirect('driver/', permanent=True)),
     path('driver/', DriversListView.as_view(), name='home'),
     path('driver/current/', DriversListCurrentView.as_view(), name='driver_current' ),
     path('driver/past/', DriversListPastView.as_view(), name='driver_past' ),
