@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load ratings %}
+
+{% block content %}
+
+<div class="container text-center">
+    <div class="row">
+        <div class="col-8">
+            <div class="card mb-3 mx-auto" style="width: 20rem;">
+                <img src="{{team.logo.url}}" class="card-img-top" alt="{{ driver }}">
+                <div class="card-body">
+                    <h5 class="card-title" align="center">{{ team }}</h5>
+                    <h5 class="card-title" align="center">Country: {{ team.country }} <img class="small-logo" src="{{ team.get_flag.url}}"></h5>
+                    <h5 class="card-title" align="center"><img class="small-logo" src="{{ team.logo.url }}"></h5>
+                    <div class="card-footer" align="center">
+                        <small class="text-muted">Constructor championships: {{ team.number_of_championships }} </small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="rating">
+                {% ratings object %}
+            </div>
+        </div>
+    </div>
+</div>
+      
+{% endblock content%}

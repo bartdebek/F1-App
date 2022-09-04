@@ -4,5 +4,7 @@ from .models import Country,Team,Driver
 # Register your models here.
 admin.site.register(Country)
 admin.site.register(Team)
-admin.site.register(Driver)
 
+@admin.register(Driver)
+class DriverModelAdmin(admin.ModelAdmin):
+    list_display = ('__str__', 'team', 'nationality', 'active')

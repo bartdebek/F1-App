@@ -168,3 +168,8 @@ ACCOUNT_UNIQUE_EMAIL = True
 # django-crispy-forms
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
+
+#django-star-rating
+STAR_RATINGS_STAR_SPRITE = BASE_DIR / '/star-ratings/images/helmet.png'
+STAR_RATINGS_STAR_HEIGHT = 40
+STAR_RATINGS_STAR_WIDTH = 40

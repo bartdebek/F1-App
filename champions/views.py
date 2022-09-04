@@ -1,11 +1,10 @@
-from lib2to3.pgen2.driver import Driver
 from django.views.generic import (
     ListView, 
     TemplateView, 
     DetailView,
 )
 
-from .models import Driver
+from .models import Driver, Team
 
 
 class DriversListView(ListView):
@@ -35,3 +34,13 @@ class DriversListPastView(ListView):
     context_object_name = 'driver_list_past'
     queryset = Driver.objects.filter(active=False)
     template_name = 'drivers/driver_past.html'
+
+
+class TeamsListView(ListView):
+    model = Team
+    context_object_name = 'team_list'
+    template_name = 'teams/team_list.html'
+
+class TeamsDetailView(DetailView):
+    model = Team
+    template_name = 'teams/team_detail.html'
