@@ -2,7 +2,6 @@ from datetime import date, timedelta
 from django.db import models
 
 
-
 class Country(models.Model):
     name = models.CharField(max_length=50)
     flag = models.ImageField(upload_to='images/flags/')
@@ -29,6 +28,9 @@ class Team(models.Model):
     def __str__(self):
         return self.name
 
+    def get_flag(self):
+        return self.country.flag
+
     
 class Driver(models.Model):
     first_name = models.CharField(max_length=20)
@@ -52,7 +54,7 @@ class Driver(models.Model):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
-
+    
     def get_flag(self):
         return self.nationality.flag
 

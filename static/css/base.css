@@ -1,5 +1,5 @@
 .img-thumbnail {
-  object-fit: cover;
+  object-fit: scale-down;
   height: 200px;
 }
 
