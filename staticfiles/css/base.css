@@ -25,3 +25,7 @@
 .profile-pic {
   object-fit: cover;
 }
+
+.rating {
+  margin-top: 200px;
+}
