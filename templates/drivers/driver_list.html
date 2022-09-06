@@ -11,7 +11,7 @@
 
     <div class="col-sm-4">
     <div class="card" style="width: 18rem;">
-        <a href="{% url 'driver_detail' driver.id %}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
+        <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
         <h5 class="card-title" align="center">{{ driver }}</h5>
         <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
         {% if driver.active %}

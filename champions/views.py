@@ -20,6 +20,8 @@ class AboutPageView(TemplateView):
 class DriversDetailView(DetailView):
     model = Driver
     template_name = 'drivers/driver_detail.html'
+    slug_url_kwarg = 'uuid'
+    slug_field = 'uuid'
 
 
 class DriversListCurrentView(ListView):
@@ -44,3 +46,7 @@ class TeamsListView(ListView):
 class TeamsDetailView(DetailView):
     model = Team
     template_name = 'teams/team_detail.html'
+    slug_url_kwarg = 'uuid'
+    slug_field = 'uuid'
+
+    
