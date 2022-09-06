@@ -1,5 +1,8 @@
+import uuid
 from datetime import date, timedelta
 from django.db import models
+from django.urls import reverse
+from django.template.defaultfilters import slugify
 
 
 class Country(models.Model):
@@ -11,6 +14,10 @@ class Country(models.Model):
 
 
 class Team(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid.uuid4,
+        editable=False)
     name = models.CharField(max_length=50)
     wikipedia_link = models.URLField(max_length=200)
     twitter_handle = models.CharField(max_length=20,blank=True,null=True)
@@ -31,8 +38,16 @@ class Team(models.Model):
     def get_flag(self):
         return self.country.flag
 
+    def get_absolute_url(self):
+        return reverse('driver_detail',
+                       args=[str(self.uuid)])
+
     
 class Driver(models.Model):
+    uuid = models.UUIDField(
+        unique=True,
+        default=uuid.uuid4,
+        editable=False)
     first_name = models.CharField(max_length=20)
     last_name = models.CharField(max_length=20)
     active = models.BooleanField(default=False)
@@ -60,7 +75,7 @@ class Driver(models.Model):
 
     def get_logo(self):
         return self.team.logo
-
+    
     def get_age(self):
         today = date.today()
         birthday = self.date_of_birth
@@ -68,8 +83,11 @@ class Driver(models.Model):
             return (self.date_of_death - birthday) // timedelta(days=365.2425)
         else:
             return (today - birthday) // timedelta(days=365.2425)
+
+    def get_absolute_url(self):
+        return reverse('driver_detail',
+                       args=[str(self.uuid)])
             
-    
     class Meta:
         ordering = ['-number_of_championships']
 
