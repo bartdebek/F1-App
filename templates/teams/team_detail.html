@@ -18,6 +18,19 @@
                     </div>
                 </div>
             </div>
+            {% for tweet in team.tweet_list %}
+            <div id="tweet">
+                <div class="tweet-container pt pb pr pl">
+                  <div class="tweet-content pt"><br><i><b>{{ tweet.text }}</b></i><br></div>
+                  <div class="date pt pb">{{ tweet.created_at }}</div>
+            
+                  <div class="rl pt pb">
+                    <div class="retweets"><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
+                    <div class="likes"><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
         </div>
         <div class="col-4">
             <div class="rating">

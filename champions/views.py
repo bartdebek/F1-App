@@ -1,3 +1,9 @@
+from django.core.paginator import (
+    Paginator, 
+    PageNotAnInteger, 
+    EmptyPage
+)
+from django.shortcuts import render
 from django.views.generic import (
     ListView, 
     TemplateView, 
@@ -5,6 +11,7 @@ from django.views.generic import (
 )
 
 from .models import Driver, Team
+
 
 
 class DriversListView(ListView):
@@ -49,4 +56,16 @@ class TeamsDetailView(DetailView):
     slug_url_kwarg = 'uuid'
     slug_field = 'uuid'
 
-    
+# def tweet_list(request):
+#     tweets = user_tweets()
+#     # tweets = Tweet.objects.order_by('-published_date')
+#     # page = request.GET.get('page', 1)
+#     # paginator = Paginator(tweets, 10)
+#     # try:
+#     #     tweets = paginator.page(page)
+#     # except PageNotAnInteger:
+#     #     tweets = paginator.page(1)
+#     # except EmptyPage:
+#     #     tweets = paginator.page(paginator.num_pages)
+#     print(tweets)
+#     return render(request, 'drivers/tweet_list.html', {'tweets': tweets.data})

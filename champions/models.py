@@ -2,7 +2,10 @@ import uuid
 from datetime import date, timedelta
 from django.db import models
 from django.urls import reverse
-from django.template.defaultfilters import slugify
+
+import tweepy
+
+client = tweepy.Client(bearer_token='AAAAAAAAAAAAAAAAAAAAADG0gwEAAAAAckG7Xu4xsqDtfLaAEPYgAqMNQ9s%3Dev7xTVFcFs3PKiffsTWzlIQJhfFBoE6T0PKYjdu1FBXvQ4A4pE')
 
 
 class Country(models.Model):
@@ -39,8 +42,19 @@ class Team(models.Model):
         return self.country.flag
 
     def get_absolute_url(self):
-        return reverse('driver_detail',
+        return reverse('team_detail',
                        args=[str(self.uuid)])
+
+    def tweet_list(self):
+        team = Team.objects.get(id=self.id)
+        name = team.twitter_handle
+        team_data = client.get_user(username=name)
+        team_id = team_data.data.id
+        tweets = client.get_users_tweets(id=team_id, 
+                                        max_results=5, 
+                                        tweet_fields=['created_at','public_metrics'],
+                                    )
+        return tweets.data
 
     
 class Driver(models.Model):
@@ -87,7 +101,29 @@ class Driver(models.Model):
     def get_absolute_url(self):
         return reverse('driver_detail',
                        args=[str(self.uuid)])
-            
+
+    def tweet_list(self):
+        driver = Driver.objects.get(id=self.id)
+        name = driver.twitter_handle
+        driver_data = client.get_user(username=name)
+        driver_id = driver_data.data.id
+        tweets = client.get_users_tweets(id=driver_id, max_results=5)
+        print(tweets)
+        return tweets.data
+    
     class Meta:
         ordering = ['-number_of_championships']
+
+    
+class Tweet(models.Model):
+    author = models.ForeignKey(Driver, on_delete=models.CASCADE)
+    tweet_text = models.TextField()
+    published_date = models.DateTimeField(blank=True, null=True)
+    is_active = models.BooleanField(default=True)
+
+    def tweet_id(self):
+        return self.author.driver.values('pk', 'twitter_handle')
+
+    def __str__(self):
+        return self.tweet_text
 
