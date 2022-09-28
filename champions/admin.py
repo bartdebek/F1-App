@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.db.models import F
-from .models import Country,Team,Driver
+from .models import Country, Team, Driver, Tweet
 
 
 @admin.action(description='Add race to selected drivers')
@@ -23,3 +23,4 @@ class DriverModelAdmin(admin.ModelAdmin):
 admin.site.register(Country)
 admin.site.register(Team)
 admin.site.register(Driver, DriverModelAdmin)
+admin.site.register(Tweet)

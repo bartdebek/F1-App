@@ -9,6 +9,7 @@ from .views import (
     TeamsListView,
     TeamsDetailView,
 )
+from . import views
 
 
 urlpatterns = [
@@ -17,6 +18,7 @@ urlpatterns = [
     path('driver/past/', DriversListPastView.as_view(), name='driver_past' ),
     path('about/', AboutPageView.as_view(), name='about'),
     path('driver/<uuid:uuid>/', DriversDetailView.as_view(), name='driver_detail'),
+    # path('driver/<uuid:uuid>/tweets', views.tweet_list, name ='tweet_list'),
 
     path('team/', TeamsListView.as_view(), name='team_list'),
     path('team/current/', DriversListCurrentView.as_view(), name='team_current' ),

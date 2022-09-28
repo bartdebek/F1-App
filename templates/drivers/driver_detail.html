@@ -23,7 +23,12 @@
                     </div>
                 </div>
             </div>
+            {% for tweet in driver.tweet_list %}
+            <p>{{ tweet }}</p>
+            <p>{{ tweet.fields.created_at}}</p>
+            {% endfor %}
         </div>
+
         <div class="col-4">
             <div class="rating">
                 {% ratings object %}
