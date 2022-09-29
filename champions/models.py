@@ -107,8 +107,9 @@ class Driver(models.Model):
         name = driver.twitter_handle
         driver_data = client.get_user(username=name)
         driver_id = driver_data.data.id
-        tweets = client.get_users_tweets(id=driver_id, max_results=5)
-        print(tweets)
+        tweets = client.get_users_tweets(id=driver_id, 
+                                        max_results=5, 
+                                        tweet_fields=['created_at','public_metrics'],)
         return tweets.data
     
     class Meta:
