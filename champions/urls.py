@@ -1,5 +1,4 @@
-from django.shortcuts import redirect
-from django.urls import path, include
+from django.urls import path
 from .views import (
     AboutPageView, 
     DriversListView, 
@@ -9,7 +8,6 @@ from .views import (
     TeamsListView,
     TeamsDetailView,
 )
-from . import views
 
 
 urlpatterns = [

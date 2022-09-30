@@ -11,8 +11,8 @@
                 <img src="{{driver.photo.url}}" class="card-img-top" alt="{{ driver }}">
                 <div class="card-body">
                     <h5 class="card-title" align="center">{{ driver }}</h5>
-                    <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
-                    <h5 class="card-title" align="center">Most known from: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+                    <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
+                    <h5 class="card-title" align="center"><img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
                     <div class="card-footer" align="center">
                     <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
                     {% if driver.date_of_death %}
@@ -27,14 +27,14 @@
             <ul class="list-group">
                 {% for tweet in driver.tweet_list %}
                 <li class="list-group-item">
-                    <div id="tweet">
-                        <div class="tweet-container pt pb pr pl">
-                          <div class="tweet-content pt"><br><i><b>{{ tweet.text }}</b></i><br></div>
-                          <div class="date pt pb">{{ tweet.created_at }}</div>
+                    <div>
+                        <div>
+                          <div><br><i><b>{{ tweet.text }}</b></i><br></div>
+                          <div>{{ tweet.created_at }}</div>
                     
-                          <div class="rl pt pb">
-                            <div class="retweets"><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
-                            <div class="likes"><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
+                          <div>
+                            <div><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
+                            <div><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
                           </div>
                         </div>
                       </div>

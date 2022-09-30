@@ -2,10 +2,11 @@ import uuid
 from datetime import date, timedelta
 from django.db import models
 from django.urls import reverse
+from decouple import config
 
 import tweepy
 
-client = tweepy.Client(bearer_token='AAAAAAAAAAAAAAAAAAAAADG0gwEAAAAAckG7Xu4xsqDtfLaAEPYgAqMNQ9s%3Dev7xTVFcFs3PKiffsTWzlIQJhfFBoE6T0PKYjdu1FBXvQ4A4pE')
+client = tweepy.Client(bearer_token=config("TWITTER_TOKEN"))
 
 
 class Country(models.Model):
@@ -114,17 +115,3 @@ class Driver(models.Model):
     
     class Meta:
         ordering = ['-number_of_championships']
-
-    
-class Tweet(models.Model):
-    author = models.ForeignKey(Driver, on_delete=models.CASCADE)
-    tweet_text = models.TextField()
-    published_date = models.DateTimeField(blank=True, null=True)
-    is_active = models.BooleanField(default=True)
-
-    def tweet_id(self):
-        return self.author.driver.values('pk', 'twitter_handle')
-
-    def __str__(self):
-        return self.tweet_text
-
