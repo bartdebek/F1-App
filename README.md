@@ -12,6 +12,7 @@ TO DO:
 - Tool to compare driver's / team's achievements and statistics
 - Comments / discussion section on specific driver and team page
 - Creating REST API and better frontend
+- Better test coverage
 - Season rankings
 - Ultimately deployment of live version
 
