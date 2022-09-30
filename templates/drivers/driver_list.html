@@ -13,11 +13,11 @@
     <div class="card" style="width: 18rem;">
         <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
         <h5 class="card-title" align="center">{{ driver }}</h5>
-        <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
+        <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
         {% if driver.active %}
-        <h5 class="card-title" align="center">Team: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+        <h5 class="card-title" align="center"><img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
         {% else %}
-        <h5 class="card-title" align="center">Last team: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+        <h5 class="card-title" align="center">Last team: <img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
         {% endif %}
         <div class="card-footer" align="center">
           <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>

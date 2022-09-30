@@ -17,8 +17,12 @@
   padding: 50px;
 }
 
-.small-logo {
+.small-flag {
   height: 20px;
+}
+
+.small-logo {
+  height: 40px;
 }
 
 .small-team-logo {

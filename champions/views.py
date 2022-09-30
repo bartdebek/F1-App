@@ -1,9 +1,3 @@
-from django.core.paginator import (
-    Paginator, 
-    PageNotAnInteger, 
-    EmptyPage
-)
-from django.shortcuts import render
 from django.views.generic import (
     ListView, 
     TemplateView, 
@@ -50,11 +44,13 @@ class TeamsListView(ListView):
     context_object_name = 'team_list'
     template_name = 'teams/team_list.html'
 
+
 class TeamsDetailView(DetailView):
     model = Team
     template_name = 'teams/team_detail.html'
     slug_url_kwarg = 'uuid'
     slug_field = 'uuid'
+
 
 # def tweet_list(request):
 #     tweets = user_tweets()
