@@ -12,7 +12,7 @@
                 <div class="card-body">
                     <h5 class="card-title" align="center">{{ driver }}</h5>
                     <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
-                    <h5 class="card-title" align="center"><img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+                    <h5 class="card-title" align="center"><a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
                     <div class="card-footer" align="center">
                     <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
                     {% if driver.date_of_death %}
@@ -23,9 +23,10 @@
                     </div>
                 </div>
             </div>
+            {% if driver.twitter_handle %}
             <h3 align="center">Latest tweets</h3>
             <ul class="list-group">
-                {% for tweet in driver.tweet_list %}
+                    {% for tweet in driver.tweet_list %}
                 <li class="list-group-item">
                     <div>
                         <div>
@@ -41,8 +42,8 @@
                 </li>
                 {% endfor %}
               </ul>
+              {% endif %}
         </div>
-
         <div class="col-4">
             <div class="rating">
                 {% ratings object %}
