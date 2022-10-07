@@ -15,7 +15,7 @@ TO DO:
 - Creating REST API and better frontend
 - Better test coverage
 - Season rankings
-- Mockup merchendise store
+- Mock-up merchendise store
 - Ultimately deployment of live version
 
 
