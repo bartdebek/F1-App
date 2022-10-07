@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 from environs import Env
+from decouple import config
 
 env = Env()
 env.read_env()
@@ -48,6 +49,8 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'star_ratings',
+    'django_comments_xtd',
+    'django_comments',
     # LOCAL
     'champions.apps.ChampionsConfig',
     'accounts.apps.AccountsConfig',
@@ -153,12 +156,12 @@ LOGIN_REDIRECT_URL = 'home'
 ACCOUNT_LOGOUT_REDIRECT = 'home'
 
 # django-allauth config
-SITE_ID = 1
+SITE_ID = 2
 AUTHENTICATION_BACKENDS = (
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_USERNAME_REQUIRED = False
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
@@ -169,7 +172,20 @@ ACCOUNT_UNIQUE_EMAIL = True
 CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
-#django-star-rating
+# django-star-rating
 STAR_RATINGS_STAR_SPRITE = 'images/helmet.png'
 STAR_RATINGS_STAR_HEIGHT = 40
 STAR_RATINGS_STAR_WIDTH = 40
+
+# comments-xtb app settings
+COMMENTS_APP = 'django_comments_xtd'
+COMMENTS_XTD_MAX_THREAD_LEVEL = 2
+COMMENTS_XTD_CONFIRM_EMAIL = True
+
+# email setup
+EMAIL_HOST = "serwer2214224.home.pl"
+EMAIL_PORT = "587"
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = "Admin <admin@bartoszdebek.pl>"
