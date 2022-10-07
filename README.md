@@ -7,6 +7,7 @@ User has the ability to:
 - Check basic information and achievements of drivers / teams
 - Rate drivers / teams
 - Check latest tweets posted by particular drivers / teams
+- Add comments on driver detail pages (email verification for non-registered users)
 
 TO DO:
 - Tool to compare driver's / team's achievements and statistics
@@ -14,6 +15,7 @@ TO DO:
 - Creating REST API and better frontend
 - Better test coverage
 - Season rankings
+- Mockup merchendise store
 - Ultimately deployment of live version
 
 
