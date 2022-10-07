@@ -26,6 +26,7 @@ urlpatterns = [
     path('accounts/',include('allauth.urls')),
     path('',include('champions.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
+    path('comments/', include('django_comments_xtd.urls')),
 ] + static(
     settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
 )
