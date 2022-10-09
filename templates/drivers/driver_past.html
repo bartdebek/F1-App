@@ -10,7 +10,7 @@
     {% if forloop.counter0|divisibleby:4 %} <div class="row"> {%  endif %}
 
     <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card">
         <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
         <h5 class="card-title" align="center">{{ driver }}</h5>
         <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>

@@ -10,18 +10,14 @@
     {% if forloop.counter0|divisibleby:4 %} <div class="row"> {%  endif %}
 
     <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
+    <div class="card">
         <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
         <h5 class="card-title" align="center">{{ driver }}</h5>
-        <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-logo" src="{{ driver.get_flag.url}}"></h5>
-        <h5 class="card-title" align="center">Most known from: {{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
+        <h5 class="card-title" align="center">Nationality: {{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
+        <h5 class="card-title" align="center">{{ driver.team }}<img class="small-logo" src="{{ driver.get_logo.url }}"></h5>
         <div class="card-footer" align="center">
           <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
-          {% if driver.date_of_death %}
-          <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
-          {% else %}
           <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
-          {% endif %}
         </div>
       </div>
     </div>

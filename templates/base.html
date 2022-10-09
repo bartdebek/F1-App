@@ -32,7 +32,7 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                             <li><a class="dropdown-item" href="{% url 'driver_current' %}">Current Grid</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_past' %}">Past Champions</a></li>
-                            <li><a class="dropdown-item" href="">Compare Drivers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'driver_ratings' %}">Driver Ratings</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -49,8 +49,8 @@
                         2022 Rankings
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="">Drivers</a></li>
-                            <li><a class="dropdown-item" href="">Teams</a></li>
+                            <li><a class="dropdown-item" href="{% url 'driver_classification' %}">Drivers</a></li>
+                            <li><a class="dropdown-item" href="{% url 'team_classification' %}">Teams</a></li>
                         </ul>
                     </li>
                     <li class="nav-item">

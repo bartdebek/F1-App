@@ -1,9 +1,11 @@
 import uuid
 from datetime import date, timedelta
+from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
 from decouple import config
 
+from star_ratings.models import Rating
 import tweepy
 
 client = tweepy.Client(bearer_token=config("TWITTER_TOKEN"))
@@ -23,6 +25,7 @@ class Team(models.Model):
         default=uuid.uuid4,
         editable=False)
     name = models.CharField(max_length=50)
+    active = models.BooleanField(default=False)
     wikipedia_link = models.URLField(max_length=200)
     twitter_handle = models.CharField(max_length=20,blank=True,null=True)
     logo = models.ImageField(upload_to='images/logos/')
@@ -33,8 +36,7 @@ class Team(models.Model):
     total_races = models.PositiveIntegerField(default=0)
     total_podiums = models.PositiveIntegerField(default=0)
     # User rating
-    average_rating = models.FloatField(default=0)
-    number_of_ratings = models.PositiveIntegerField(default=0)
+    ratings = GenericRelation(Rating, related_query_name='teams')
 
     def __str__(self):
         return self.name
@@ -79,8 +81,8 @@ class Driver(models.Model):
     total_races = models.PositiveIntegerField(default=0)
     total_podiums = models.PositiveIntegerField(default=0)
     # User rating
-    average_rating = models.FloatField(default=0)
-    number_of_ratings = models.PositiveIntegerField(default=0)
+    ratings = GenericRelation(Rating, related_query_name='drivers')
+
 
     def __str__(self):
         return f'{self.first_name} {self.last_name}'
@@ -112,6 +114,14 @@ class Driver(models.Model):
                                         max_results=5, 
                                         tweet_fields=['created_at','public_metrics'],)
         return tweets.data
-    
-    class Meta:
-        ordering = ['-number_of_championships']
+
+
+class SeasonResults(models.Model):
+    driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
+    team = models.ForeignKey(Team,on_delete=models.CASCADE)
+    race = models.CharField(max_length=20)
+    date = models.DateField()
+    points = models.FloatField(default=0,null=True,blank=True)
+
+    def __str__(self):
+        return f'{self.driver} {self.team} {self.race} {self.points} points'
