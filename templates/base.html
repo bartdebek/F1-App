@@ -30,6 +30,7 @@
                         Drivers
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="{% url 'home' %}">All F1 Drivers</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_current' %}">Current Grid</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_past' %}">Past Champions</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_ratings' %}">Driver Ratings</a></li>
@@ -40,8 +41,10 @@
                         Teams
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="{% url 'team_list' %}">Current Grid</a></li>
-                            <li><a class="dropdown-item" href="">Compare Teams</a></li>
+                            <li><a class="dropdown-item" href="{% url 'team_list' %}">All F1 Teams</a></li>
+                            <li><a class="dropdown-item" href="{% url 'team_current' %}">Current Grid</a></li>
+                            <li><a class="dropdown-item" href="{% url 'team_past' %}">Past Champions</a></li>
+                            <li><a class="dropdown-item" href="{% url 'team_ratings' %}">Team Ratings</a></li>
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -71,6 +74,10 @@
                         <a class="nav-link" aria-current="page" href="{% url 'account_signup' %}">Sign Up</a>
                     </li>
                     {% endif %}
+                    <form class="d-flex" role="search" action="{% url 'search_results' %}" method="get">
+                        <input class="form-control me-2" type="search" name="q" placeholder="Search Driver" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
+                    </form>
                 </ul>
             </div>
         </div>
