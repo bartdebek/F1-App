@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load ratings %}
+
+{% block content %}
+
+<h1>Top user rated teams</h1><br>
+    {% for team in team_list %}
+    {% if forloop.counter0|divisibleby:3 %} <div class="card-group"> {%  endif %}
+
+      <div class="col-sm-4">
+        <div class="card">
+            <a href="{{ team.get_absolute_url }}"><img src="{{team.logo.url}}" class="img-thumbnail" alt="{{ team }}"></a>
+            <h5 class="card-title" align="center">{{ team }}</h5>
+            <h5 class="card-title" align="center">{{ team.country }} <img class="small-flag" src="{{ team.get_flag.url}}"></h5>
+            {% ratings team %}
+            <div class="card-footer" align="center">
+              <small class="text-muted">F1 Championships: {{ team.number_of_championships }} </small>
+            </div>
+          </div>
+        </div>
+
+    {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
+    {% endfor %}
+
+{% endblock content%}
+

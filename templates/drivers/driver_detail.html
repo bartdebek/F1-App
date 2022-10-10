@@ -13,7 +13,11 @@
                 <div class="card-body">
                     <h5 class="card-title" align="center">{{ driver }}</h5>
                     <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
-                    <h5 class="card-title" align="center"><a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
+                    <p>
+                        {% for team in driver.team.all %}
+                        <a href="{{ team.get_absolute_url }}"><img class="small-team-logo" src="{{ team.logo.url }}"></a>
+                        {% endfor %}
+                    </p>
                     <div class="card-footer" align="center">
                     <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
                     {% if driver.date_of_death %}
@@ -54,7 +58,7 @@
 </div>
 {% get_comment_count for object as comment_count %}
             <div class="py-4 text-center">
-                <a href="{% url 'home' %}">Back to the post list</a>
+                <a href="{% url 'home' %}">Back to the drivers list</a>
                 &nbsp;&sdot;&nbsp;
                 {{ comment_count }} comment{{ comment_count|pluralize }}
                 ha{{ comment_count|pluralize:"s,ve" }} been posted.

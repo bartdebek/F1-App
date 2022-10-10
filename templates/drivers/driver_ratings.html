@@ -5,24 +5,31 @@
 
 {% block content %}
 
-<h1>Top rated drivers by users</h1><br>
+<h1>Top user rated drivers</h1><br>
     {% for driver in driver_list %}
     {% if forloop.counter0|divisibleby:3 %} <div class="card-group"> {%  endif %}
 
-    <div class="col-sm-4">
-    <div class="card" style="width: 18rem;">
-      <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="card-img-top" alt="{{ driver }}"></a>
-        {% comment %} <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a> {% endcomment %}
-        <h5 class="card-title">{{ driver }}</h5>
-        <h5 class="card-title">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
-        {% if driver.active %}
-        <h5 class="card-title"><a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
-        {% else %}
-        <h5 class="card-title">Last team: <a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
-        {% endif %}
-        {% ratings driver %}
-    </div>
-    </div>
+      <div class="col-sm-4">
+        <div class="card">
+            <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
+            <h5 class="card-title" align="center">{{ driver }}</h5>
+            <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
+            <p>
+              {% for team in driver.team.all %}
+              <a href="{{ team.get_absolute_url }}"><img class="small-team-logo" src="{{ team.logo.url }}"></a>
+              {% endfor %}
+            </p>
+            {% ratings driver %}
+            <div class="card-footer" align="center">
+              <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
+              {% if driver.date_of_death %}
+              <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
+              {% else %}
+              <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
+              {% endif %}
+            </div>
+          </div>
+        </div>
 
     {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
     {% endfor %}

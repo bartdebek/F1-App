@@ -16,7 +16,7 @@ def add_podium(modeladmin, request, queryset):
     queryset.update(total_podiums=F('total_podiums') + 1)
 
 class DriverModelAdmin(admin.ModelAdmin):
-    list_display = ('__str__', 'team', 'nationality', 'active')
+    list_display = ('__str__', 'nationality', 'active')
     ordering = ['active', 'last_name']
     actions = [add_race, add_win, add_podium]
 

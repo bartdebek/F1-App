@@ -72,7 +72,7 @@ class Driver(models.Model):
     twitter_handle = models.CharField(max_length=20,null=True,blank=True)
     photo = models.ImageField(upload_to='images/drivers/')
     nationality = models.ForeignKey(Country,on_delete=models.CASCADE)
-    team = models.ForeignKey(Team,on_delete=models.CASCADE)
+    team = models.ManyToManyField(Team)
     number_of_championships = models.PositiveIntegerField(default=0)
     number_of_wins = models.PositiveIntegerField(default=0)
     first_race_date = models.DateField(null=True)
