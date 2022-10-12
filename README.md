@@ -8,13 +8,14 @@ User has the ability to:
 - Rate drivers / teams
 - Check latest tweets posted by particular drivers / teams
 - Add comments on driver detail pages (email verification for non-registered users)
+- Check season rankings
+- Leave comment on specific driver and team page
+- Log in using email, GitHub or Google account
 
 TO DO:
 - Tool to compare driver's / team's achievements and statistics
-- Comments / discussion section on specific driver and team page
 - Creating REST API and better frontend
 - Better test coverage
-- Season rankings
 - Mock-up merchendise store
 - Ultimately deployment of live version
 
