@@ -5,7 +5,7 @@
 
 {% block content %}
 
-<table class="table table-dark table-borderless align-middle">
+<table class="table table-striped table-hover align-middle">
     <thead>
       <tr>
         <th scope="col">Position</th>
@@ -22,7 +22,11 @@
         <th scope="row">{{ forloop.counter }}</th>
         <td><a href="{{ driver.get_absolute_url }}"><img src="{{ driver.photo.url }}" class="table-photo"></a></td>
         <td>{{ driver }}</td>
-        <td><a href="{{ driver.team.get_absolute_url }}"><img src="{{ driver.get_logo.url }}" class="small-logo"></a></td>
+        <td>        
+          {% for team in driver.team.all %}
+          <a href="{{ team.get_absolute_url }}"><img class="small-team-logo" src="{{ team.logo.url }}"></a>
+          {% endfor %}
+        </td>
         <td ><img src="{{ driver.get_flag.url }}" class="small-flag"></td>
         <td>{{ driver.total_points|floatformat:"-1" }}</td>
       </tr>

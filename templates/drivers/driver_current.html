@@ -7,20 +7,22 @@
 
 
     {% for driver in driver_list_current %}
-    {% if forloop.counter0|divisibleby:4 %} <div class="row"> {%  endif %}
+    {% if forloop.counter0|divisibleby:3 %} <div class="row"> {%  endif %}
 
       <div class="col-sm-4">
         <div class="card">
             <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
             <h5 class="card-title" align="center">{{ driver }}</h5>
             <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
-            {% if driver.active %}
-            <h5 class="card-title" align="center"><a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
+            {% for team in driver.team.all %}
+            <h5 class="card-title" align="center"><a href="{{ team.get_absolute_url }}"><img class="small-team-logo" src="{{ team.logo.url }}"></a></h5>
+            {% endfor %}
+            {% if driver.active %}    
             <h5 class="card-title" align="center"><a href="{% url 'driver_current' %}"><button type="button" class="btn btn-success">Active</button></a></h5>
             {% else %}
-            <h5 class="card-title" align="center"> Last team: <a href="{{ driver.team.get_absolute_url }}"><img class="small-logo" src="{{ driver.get_logo.url }}"></a></h5>
             <h5 class="card-title" align="center"><a href="{% url 'driver_past' %}"><button type="button" class="btn btn-danger">Retired</button></a></h5>
             {% endif %}
+    
             <div class="card-footer" align="center">
               <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
               {% if driver.date_of_death %}
@@ -32,7 +34,7 @@
           </div>
         </div>
 
-    {%  if forloop.counter|divisibleby:4 or forloop.last %}</div><br>{%  endif %}
+    {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
     {% endfor %}
 
 {% endblock content%}

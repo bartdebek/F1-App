@@ -14,11 +14,12 @@ from .views import (
     SearchResultsListView,
     TeamsListCurrentView,
     TeamsListPastView,
+    MyRatingsView
 )
 
 
 urlpatterns = [
-    path('driver/', DriversListView.as_view(), name='home'),
+    path('', DriversListView.as_view(), name='home'),
     path('driver/current/', DriversListCurrentView.as_view(), name='driver_current' ),
     path('driver/past/', DriversListPastView.as_view(), name='driver_past' ),
     path('driver/search', SearchResultsListView.as_view(), name='search_results'),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('about/', AboutPageView.as_view(), name='about'),
     path('driver/<uuid:uuid>/', DriversDetailView.as_view(), name='driver_detail'),
     path('driver/ratings/', DriverRatingsView.as_view(), name='driver_ratings' ),
+    path('driver/my_ratings.html/', MyRatingsView.as_view(), name='my_ratings'),
 
     path('team/', TeamsListView.as_view(), name='team_list'),
     path('team/current/', TeamsListCurrentView.as_view(), name='team_current' ),

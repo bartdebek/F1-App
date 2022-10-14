@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load ratings %}
+
+{% block content %}
+
+<h2>Hello {{ user.email }}!</h2>
+<h3>Your ratings:</h3>
+<ul class="list-group">
+    {% for rating in rating_list %}
+    <li class="list-group-item">{{ rating }}</li>
+    {% endfor %}
+  </ul>
+
+{% endblock content %}
