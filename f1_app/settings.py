@@ -175,18 +175,18 @@ if not LOCAL_SERVE_STATIC_FILES:
     STATIC_DEFAULT_ACL = 'public-read'
     STATIC_LOCATION = 'static'
     STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
-    STATICFILES_STORAGE = 'f1-app.utils.storage_backends.StaticStorage'
+    STATICFILES_STORAGE = 'f1_app.utils.storage_backends.StaticStorage'
 
 if not LOCAL_SERVE_MEDIA_FILES:
     PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
     PUBLIC_MEDIA_LOCATION = 'media/public'
 
     MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'f1-app.utils.storage_backends.PublicMediaStorage'
+    DEFAULT_FILE_STORAGE = 'f1_app.utils.storage_backends.PublicMediaStorage'
 
     PRIVATE_MEDIA_DEFAULT_ACL = 'private'
     PRIVATE_MEDIA_LOCATION = 'media/private'
-    PRIVATE_FILE_STORAGE = 'f1-app.utils.storage_backends.PrivateMediaStorage'
+    PRIVATE_FILE_STORAGE = 'f1_app.utils.storage_backends.PrivateMediaStorage'
 
 
 LOGIN_REDIRECT_URL = 'home'
