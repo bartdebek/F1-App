@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from email.policy import default
 from pathlib import Path
 from environs import Env
-from decouple import config
 
 env = Env()
 env.read_env()
@@ -193,8 +192,8 @@ COMMENTS_XTD_CONFIRM_EMAIL = True
 # email setup
 EMAIL_HOST = "serwer2214224.home.pl"
 EMAIL_PORT = "587"
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "Admin <admin@bartoszdebek.pl>"
 

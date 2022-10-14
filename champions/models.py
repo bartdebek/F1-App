@@ -3,12 +3,15 @@ from datetime import date, timedelta
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
-from decouple import config
+from environs import Env
 
 from star_ratings.models import Rating
 import tweepy
 
-client = tweepy.Client(bearer_token=config("TWITTER_TOKEN"))
+# Tweepy token settings
+env = Env()
+env.read_env()
+client = tweepy.Client(bearer_token=env("TWITTER_TOKEN"))
 
 
 class Country(models.Model):
