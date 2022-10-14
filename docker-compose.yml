@@ -15,6 +15,7 @@ services:
     networks:
       - djangonetwork
     environment:
+      - "POSTGRES_HOST_AUTH_METHOD=trust"
       - "DJANGO_SECRET_KEY=django-insecure-ajuk-2^1p04sk6eu8u^obwxazo9_yd=%470h7h6r!=$$!25))n="
       - "DJANGO_DEBUG=True"
       - "DJANGO_SECURE_SSL_REDIRECT=False"
