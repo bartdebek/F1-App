@@ -10,6 +10,10 @@ services:
       - .:/code  
     depends_on:
       - db
+    links:
+      - db:db
+    networks:
+      - djangonetwork
     environment:
       - "DJANGO_SECRET_KEY=django-insecure-ajuk-2^1p04sk6eu8u^obwxazo9_yd=%470h7h6r!=$$!25))n="
       - "DJANGO_DEBUG=True"
@@ -29,3 +33,7 @@ services:
 
 volumes:
   postgres_data:
+
+networks:
+  djangonetwork:
+    driver: bridge
