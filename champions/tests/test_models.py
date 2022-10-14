@@ -23,8 +23,6 @@ class DriverTests(TestCase):
             first_race_date = datetime.date(2010, 1, 1),
             total_races = '2000',
             total_podiums = '500',
-            average_rating = 0,
-            number_of_ratings = 0,
             )
 
     def test_country_listing(self):

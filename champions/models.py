@@ -38,6 +38,9 @@ class Team(models.Model):
     # User rating
     ratings = GenericRelation(Rating, related_query_name='teams')
 
+    class Meta:
+        ordering = ('-active',)
+
     def __str__(self):
         return self.name
 

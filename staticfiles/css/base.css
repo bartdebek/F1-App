@@ -1,5 +1,5 @@
 .img-thumbnail {
-  object-fit: cover;
+  object-fit: scale-down;
   height: 200px;
 }
 
@@ -17,15 +17,27 @@
   padding: 50px;
 }
 
-.small-logo {
+.small-flag {
   height: 20px;
-  object-fit: cover;
 }
 
-.profile-pic {
-  object-fit: cover;
+.small-logo {
+  height: 40px;
+}
+
+.table-photo {
+  height: 80px;
+}
+
+.small-team-logo {
+  height: 35px;
 }
 
 .rating {
   margin-top: 200px;
+}
+
+.list-img {
+  height: 300rem;
+  object-fit: scale-down;
 }

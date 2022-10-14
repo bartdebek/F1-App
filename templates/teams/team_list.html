@@ -7,7 +7,7 @@
 
 
     {% for team in team_list %}
-    {% if forloop.counter0|divisibleby:4 %} <div class="card-group"> {%  endif %}
+    {% if forloop.counter0|divisibleby:3 %} <div class="card-group"> {%  endif %}
 
     <div class="col-sm-4">
     <div class="card">
@@ -20,12 +20,12 @@
         <h5 class="card-title" align="center"><a href="{% url 'team_past' %}"><button type="button" class="btn btn-danger">Inactive</button></a></h5>
         {% endif %}
         <div class="card-footer" align="center">
-          <small class="text-muted">F1 Championships: {{ team.number_of_championships }} </small>
+          <small class="text-muted">Constructor championships: {{ team.number_of_championships }} </small>
         </div>
       </div>
     </div>
 
-    {%  if forloop.counter|divisibleby:4 or forloop.last %}</div><br>{%  endif %}
+    {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
     {% endfor %}
 
 {% endblock content%}

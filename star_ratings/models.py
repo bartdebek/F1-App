@@ -158,5 +158,5 @@ class UserRating(TimeStampedModel):
 
     def __str__(self):
         if not app_settings.STAR_RATINGS_ANONYMOUS:
-            return '{} rating {} for {}'.format(self.user, self.score, self.rating.content_object)
+            return 'You gave rating {} for {}'.format(self.score, self.rating.content_object)
         return '{} rating {} for {}'.format(self.ip, self.score, self.rating.content_object)

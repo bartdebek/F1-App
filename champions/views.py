@@ -1,3 +1,4 @@
+from urllib import request
 from django.contrib.contenttypes.fields import GenericRelation
 from django.shortcuts import render
 from django.db.models import Avg, Count, Min, Sum, Q
@@ -8,6 +9,7 @@ from django.views.generic import (
 )
 
 from .models import Driver, Team
+from star_ratings.models import UserRating
 
 
 
@@ -19,7 +21,7 @@ class AboutPageView(TemplateView):
 class DriversListView(ListView):
     model = Driver
     context_object_name = 'driver_list'
-    queryset = Driver.objects.order_by('-number_of_championships')
+    queryset = Driver.objects.order_by('-number_of_championships','-active')
     template_name = 'drivers/driver_list.html'
 
 
@@ -33,7 +35,7 @@ class DriversDetailView(DetailView):
 class DriversListCurrentView(ListView):
     model = Driver
     context_object_name = 'driver_list_current'
-    queryset = Driver.objects.filter(active=True)
+    queryset = Driver.objects.filter(active=True).order_by('last_name')
     template_name = 'drivers/driver_current.html'
 
 
@@ -46,7 +48,7 @@ class DriversListPastView(ListView):
 
 class DriverRatingsView(ListView):
     model = Driver
-    queryset = Driver.objects.order_by('-ratings__average').order_by('-number_of_championships')
+    queryset = Driver.objects.order_by('-ratings__average', '-number_of_championships')
     context_object_name = 'driver_list'
     template_name = 'drivers/driver_ratings.html'
 
@@ -62,6 +64,7 @@ class DriversClassificationView(ListView):
 
 class TeamsListView(ListView):
     model = Team
+    queryset = Team.objects.order_by('-active','-number_of_championships')
     context_object_name = 'team_list'
     template_name = 'teams/team_list.html'
 
@@ -116,12 +119,21 @@ class SearchResultsListView(ListView):
         Q(last_name__icontains=query) |
         Q(nationality__name__icontains=query) |
         Q(team__country__name__icontains=query)
-        )
+        ).distinct()
 
     def get_context_data(self, **kwargs):
         context = super(SearchResultsListView, self).get_context_data(**kwargs)
         context['query'] = self.request.GET.get('q')
         return context
+
+
+class MyRatingsView(ListView):
+    model = UserRating
+    context_object_name = 'rating_list'
+    template_name = 'drivers/my_ratings.html'
+    def get_queryset(self):
+        return UserRating.objects.select_related('rating').filter(user=self.request.user).order_by('-score')
+
 
 # def season_admin_view(request):
 #     if request.method == "POST":
