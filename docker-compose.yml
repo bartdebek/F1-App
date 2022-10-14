@@ -3,17 +3,13 @@ services:
   web:
     build: .
     ports:
-      - "8000:8000"
+      - 8000:8000
     # command: python manage.py runserver 0.0.0.0:8000
     command: gunicorn f1_app.wsgi -b 0.0.0.0:8000
     volumes:
       - .:/code  
     depends_on:
       - db
-    links:
-      - db:db
-    networks:
-      - djangonetwork
     environment:
       - "DJANGO_SECRET_KEY=django-insecure-ajuk-2^1p04sk6eu8u^obwxazo9_yd=%470h7h6r!=$$!25))n="
       - "DJANGO_DEBUG=True"
@@ -25,19 +21,11 @@ services:
       - "SESSION_COOKIE_SECURE=False"
       - "CSRF_COOKIE_SECURE=False"
   db:
-    build: .
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - "POSTGRES_HOST_AUTH_METHOD=trust"
-    container_name: db
-    networks:
-      - djangonetwork
 
 volumes:
   postgres_data:
-
-networks:
-  djangonetwork:
-    driver: bridge
