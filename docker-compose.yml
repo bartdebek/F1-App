@@ -20,6 +20,7 @@ services:
       - "SECURE_HSTS_PRELOAD=False"
       - "SESSION_COOKIE_SECURE=False"
       - "CSRF_COOKIE_SECURE=False"
+      - "S3_ENABLED=False"
   db:
     image: postgres:13
     volumes:

@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 from email.policy import default
 from pathlib import Path
 from environs import Env
+from decouple import config
 
 env = Env()
 env.read_env()
@@ -50,6 +51,7 @@ INSTALLED_APPS = [
     'star_ratings',
     'django_comments_xtd',
     'django_comments',
+    'storages',
     # LOCAL
     'champions.apps.ChampionsConfig',
     'accounts.apps.AccountsConfig',
@@ -149,7 +151,43 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+# The following configs determine if files get served from the server or an S3 storage
+S3_ENABLED = env.bool('S3_ENABLED', default=True)
+LOCAL_SERVE_MEDIA_FILES = env.bool('LOCAL_SERVE_MEDIA_FILES', default=not S3_ENABLED)
+LOCAL_SERVE_STATIC_FILES = env.bool('LOCAL_SERVE_STATIC_FILES', default=not S3_ENABLED)
+
+if (not LOCAL_SERVE_MEDIA_FILES or not LOCAL_SERVE_STATIC_FILES) and not S3_ENABLED:
+    raise ValueError('S3_ENABLED must be true if either media or static files are not served locally')
+
+if S3_ENABLED:
+    AWS_ACCESS_KEY_ID = env('BUCKETEER_AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = env('BUCKETEER_AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = env('BUCKETEER_BUCKET_NAME')
+    AWS_S3_REGION_NAME = env('BUCKETEER_AWS_REGION')
+    AWS_DEFAULT_ACL = None
+    AWS_S3_SIGNATURE_VERSION = env('S3_SIGNATURE_VERSION', default='s3v4')
+    AWS_S3_ENDPOINT_URL = f'https://{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+
+if not LOCAL_SERVE_STATIC_FILES:
+    STATIC_DEFAULT_ACL = 'public-read'
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'{AWS_S3_ENDPOINT_URL}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'example.utils.storage_backends.StaticStorage'
+
+if not LOCAL_SERVE_MEDIA_FILES:
+    PUBLIC_MEDIA_DEFAULT_ACL = 'public-read'
+    PUBLIC_MEDIA_LOCATION = 'media/public'
+
+    MEDIA_URL = f'{AWS_S3_ENDPOINT_URL}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'example.utils.storage_backends.PublicMediaStorage'
+
+    PRIVATE_MEDIA_DEFAULT_ACL = 'private'
+    PRIVATE_MEDIA_LOCATION = 'media/private'
+    PRIVATE_FILE_STORAGE = 'example.utils.storage_backends.PrivateMediaStorage'
+
 
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
