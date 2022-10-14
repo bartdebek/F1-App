@@ -25,6 +25,7 @@ services:
       - "SESSION_COOKIE_SECURE=False"
       - "CSRF_COOKIE_SECURE=False"
   db:
+    build: .
     image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
