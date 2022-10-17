@@ -34,7 +34,7 @@
                             <li><a class="dropdown-item" href="{% url 'home' %}">All F1 Drivers</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_current' %}">Current Grid</a></li>
                             <li><a class="dropdown-item" href="{% url 'driver_past' %}">Past Champions</a></li>
-                            <li><a class="dropdown-item" href="{% url 'driver_ratings' %}">Driver Ratings</a></li>
+                            {% comment %} <li><a class="dropdown-item" href="{% url 'driver_ratings' %}">Driver Ratings</a></li> {% endcomment %}
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
@@ -45,7 +45,7 @@
                             <li><a class="dropdown-item" href="{% url 'team_list' %}">All F1 Teams</a></li>
                             <li><a class="dropdown-item" href="{% url 'team_current' %}">Current Grid</a></li>
                             <li><a class="dropdown-item" href="{% url 'team_past' %}">Inactive Teams</a></li>
-                            <li><a class="dropdown-item" href="{% url 'team_ratings' %}">Team Ratings</a></li>
+                            {% comment %} <li><a class="dropdown-item" href="{% url 'team_ratings' %}">Team Ratings</a></li> {% endcomment %}
                         </ul>
                     </li>
                     <li class="nav-item dropdown">
