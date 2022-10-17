@@ -156,7 +156,7 @@ MEDIA_ROOT = BASE_DIR / 'media'
 # The following configs determine if files get served from the server or an S3 storage
 S3_ENABLED = env.bool('S3_ENABLED', default=True)
 LOCAL_SERVE_MEDIA_FILES = env.bool('LOCAL_SERVE_MEDIA_FILES', default=not S3_ENABLED)
-LOCAL_SERVE_STATIC_FILES = env.bool('LOCAL_SERVE_STATIC_FILES', default=not S3_ENABLED)
+LOCAL_SERVE_STATIC_FILES = env.bool('LOCAL_SERVE_STATIC_FILES', default=True)
 
 if (not LOCAL_SERVE_MEDIA_FILES or not LOCAL_SERVE_STATIC_FILES) and not S3_ENABLED:
     raise ValueError('S3_ENABLED must be true if either media or static files are not served locally')
