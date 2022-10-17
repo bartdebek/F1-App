@@ -4,8 +4,7 @@ services:
     build: .
     ports:
       - 8000:8000
-    # command: python manage.py runserver 0.0.0.0:8000
-    command: gunicorn f1_app.wsgi -b 0.0.0.0:8000
+    command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code  
     depends_on:
@@ -21,8 +20,12 @@ services:
       - "SESSION_COOKIE_SECURE=False"
       - "CSRF_COOKIE_SECURE=False"
       - "S3_ENABLED=False"
+      - "LOCAL_SERVE_MEDIA_FILES=True"
+      - "LOCAL_SERVE_STATIC_FILES=True"
   db:
-    image: postgres:13
+    image: postgres:13.4-alpine
+    expose:
+      - "5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
