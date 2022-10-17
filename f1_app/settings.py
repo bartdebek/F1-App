@@ -151,7 +151,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+MEDIA_ROOT = BASE_DIR / 'media'
 
 # The following configs determine if files get served from the server or an S3 storage
 S3_ENABLED = env.bool('S3_ENABLED', default=True)
@@ -211,7 +211,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = 'bootstrap5'
 CRISPY_TEMPLATE_PACK = 'bootstrap5'
 
 # django-star-rating
-STAR_RATINGS_STAR_SPRITE = 'images/helmet.png'
+# STAR_RATINGS_STAR_SPRITE = 'images/helmet.png'
 STAR_RATINGS_STAR_HEIGHT = 40
 STAR_RATINGS_STAR_WIDTH = 40
 

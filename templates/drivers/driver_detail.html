@@ -19,14 +19,17 @@
                         {% endfor %}
                     </p>
                     <div class="card-footer" align="center">
-                    <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
-                    {% if driver.date_of_death %}
-                    <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
-                    {% else %}
-                    <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
-                    {% endif %}
+                        <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
+                        {% if driver.date_of_death %}
+                        <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
+                        {% else %}
+                        <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
+                        {% endif %}
                     </div>
                 </div>
+            </div>
+            <div>
+                {% ratings object %}
             </div>
             {% if driver.twitter_handle %}
             <h3 align="center">Latest tweets</h3>
@@ -48,11 +51,6 @@
                 {% endfor %}
               </ul>
               {% endif %}
-        </div>
-        <div class="col-4">
-            <div class="rating">
-                {% ratings object %}
-            </div>
         </div>
     </div>
 </div>
