@@ -1,14 +1,12 @@
-from urllib import request
-from django.contrib.contenttypes.fields import GenericRelation
-from django.shortcuts import render
-from django.db.models import Avg, Count, Min, Sum, Q
+from django.shortcuts import get_object_or_404
+from django.db.models import Sum, Q
 from django.views.generic import (
     ListView, 
     TemplateView, 
     DetailView,
 )
 
-from .models import Driver, Team
+from .models import Driver, SeasonResults, Team
 from star_ratings.models import UserRating
 
 
@@ -30,7 +28,9 @@ class DriversDetailView(DetailView):
     template_name = 'drivers/driver_detail.html'
     slug_url_kwarg = 'uuid'
     slug_field = 'uuid'
-
+    queryset = Driver.objects.annotate(
+        total_points=Sum('seasonresults__points')
+        )
 
 class DriversListCurrentView(ListView):
     model = Driver
@@ -74,6 +74,9 @@ class TeamsDetailView(DetailView):
     template_name = 'teams/team_detail.html'
     slug_url_kwarg = 'uuid'
     slug_field = 'uuid'
+    queryset = Team.objects.annotate(
+        total_points=Sum('seasonresults__points')
+        )
 
 
 class TeamsListCurrentView(ListView):
@@ -133,22 +136,3 @@ class MyRatingsView(ListView):
     template_name = 'drivers/my_ratings.html'
     def get_queryset(self):
         return UserRating.objects.select_related('rating').filter(user=self.request.user).order_by('-score')
-
-
-# def season_admin_view(request):
-#     if request.method == "POST":
-#         form = PostRaceForm(request.POST)
-#         queryset = Driver.objects.filter(active=True) 
-#         context = {
-#             'form':form,
-#             'queryset':queryset
-#             } 
-#         if form.is_valid():
-#             print(form.cleaned_data)
-#     else:
-#         form = PostRaceForm()
-#         queryset = Driver.objects.filter(active=True)  
-#         context = {
-#             'form':form,
-#             'queryset':queryset}
-#     return render(request, 'season/admin_page.html', context)

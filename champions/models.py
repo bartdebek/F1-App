@@ -60,8 +60,10 @@ class Team(models.Model):
         team_data = client.get_user(username=name)
         team_id = team_data.data.id
         tweets = client.get_users_tweets(id=team_id, 
-                                        max_results=5, 
-                                        tweet_fields=['created_at','public_metrics'],
+                                        max_results=5,
+                                        expansions=['attachments.media_keys'],
+                                        tweet_fields=['created_at','public_metrics','attachments'],
+                                        media_fields=['preview_image_url'],
                                     )
         return tweets.data
 
@@ -125,9 +127,8 @@ class Driver(models.Model):
 class SeasonResults(models.Model):
     driver = models.ForeignKey(Driver,on_delete=models.CASCADE)
     team = models.ForeignKey(Team,on_delete=models.CASCADE)
-    race = models.CharField(max_length=20)
-    date = models.DateField()
+    date_updated = models.DateField(auto_now=True)
     points = models.FloatField(default=0,null=True,blank=True)
 
     def __str__(self):
-        return f'{self.driver} {self.team} {self.race} {self.points} points'
+        return f'{self.driver} {self.team} {self.points} points, updated on {self.date_updated}'

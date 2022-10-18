@@ -14,7 +14,7 @@ from .views import (
     SearchResultsListView,
     TeamsListCurrentView,
     TeamsListPastView,
-    MyRatingsView
+    MyRatingsView,
 )
 
 

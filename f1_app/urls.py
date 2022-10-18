@@ -27,6 +27,10 @@ urlpatterns = [
     path('',include('champions.urls')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
     path('comments/', include('django_comments_xtd.urls')),
-] + static(
-    settings.MEDIA_URL, document_root=settings.MEDIA_ROOT
-)
+]
+
+if settings.LOCAL_SERVE_STATIC_FILES:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+if settings.LOCAL_SERVE_MEDIA_FILES:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

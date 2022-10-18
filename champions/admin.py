@@ -28,7 +28,14 @@ class TeamModelAdmin(admin.ModelAdmin):
     actions = [add_race, add_win, add_podium]
 
 
+class SeasonResultsModelAdmin(admin.ModelAdmin):
+    list_display = ('driver', 'team', 'date_updated', 'points')
+    list_editable = ('points',)
+    list_display_links = ('driver', 'team')
+
+
+
 admin.site.register(Country)
 admin.site.register(Team, TeamModelAdmin)
 admin.site.register(Driver, DriverModelAdmin)
-admin.site.register(SeasonResults)
+admin.site.register(SeasonResults, SeasonResultsModelAdmin)
