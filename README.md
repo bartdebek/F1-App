@@ -5,7 +5,7 @@ This is a project of Django powered web app containing database of F1 drivers an
 
 User has the ability to:
 - Check basic information and achievements of drivers / teams
-- Rate drivers / teams
+- Rate drivers / teams (temporarily deactivated)
 - Check latest tweets posted by particular drivers / teams
 - Add comments on driver detail pages (email verification for non-registered users)
 - Check season rankings
@@ -13,7 +13,6 @@ User has the ability to:
 - Log in using email, GitHub or Google account
 
 TO DO:
-- Tool to compare driver's / team's achievements and statistics
 - Creating REST API and better frontend
 - Better test coverage
 - Mock-up merchendise store
