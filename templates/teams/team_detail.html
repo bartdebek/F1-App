@@ -1,23 +1,29 @@
 {% extends 'base.html' %}
 
+{% load comments %}
 {% load ratings %}
 
 {% block content %}
 
 <div class="container text-center">
     <div class="row">
-        <div class="col-8">
-            <div class="card mb-3 mx-auto" style="width: 20rem;">
+            <div class="card mb-3 mx-auto" style="max-width: 40rem">
                 <img src="{{team.logo.url}}" class="card-img-top" alt="{{ driver }}">
                 <div class="card-body">
-                    <h5 class="card-title" align="center">{{ team }}</h5>
                     <h5 class="card-title" align="center">Country: {{ team.country }} <img class="small-flag" src="{{ team.get_flag.url}}"></h5>
-                    <div class="card-footer" align="center">
-                        <small class="text-muted">Constructor championships: {{ team.number_of_championships }} </small>
-                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">F1 Constructor Championships: {{ team.number_of_championships }} </li>
+                        {% if team.active %}
+                        <li class="list-group-item">Points this season: {{ team.total_points|floatformat:"-1" }} (<a href="{% url 'team_classification' %}">Classification</a>)</li>
+                        {% endif %}
+                        <li class="list-group-item">Total wins in F1: {{ team.number_of_wins }}</li>
+                        <li class="list-group-item">Total F1 races: {{ team.total_races }}</li>
+                        <li class="list-group-item">Total F1 podiums: {{ team.total_podiums }}</li>
+                        <li class="list-group-item">First F1 race date: {{ team.first_race_date }}</li>
                 </div>
             </div>
             {% if team.twitter_handle %}
+            <div class="card mb-3 mx-auto" style="max-width: 40rem">
             <h3 align="center">Latest tweets</h3>
             <ul class="list-group">
                 {% for tweet in team.tweet_list %}
@@ -36,14 +42,32 @@
                 </li>
                 {% endfor %}
               </ul>
-              {% endif %}
-        </div>
-        <div class="col-4">
-            <div class="rating">
-                {% ratings object %}
             </div>
-        </div>
+            {% endif %}
+
     </div>
 </div>
-      
+{% get_comment_count for object as comment_count %}
+<div class="py-4 text-center">
+    <a href="{% url 'team_list' %}">Back to the team list</a>
+    &nbsp;&sdot;&nbsp;
+    {{ comment_count }} comment{{ comment_count|pluralize }}
+    ha{{ comment_count|pluralize:"s,ve" }} been posted.
+</div>
+
+{% comment %} {% if object.allow_comments %} {% endcomment %}
+<div class="card card-block mb-5">
+  <div class="card-body">
+    <h4 class="card-title text-center pb-3">Post your comment</h4>
+      {% render_comment_form for object %}
+  </div>
+</div>
+{% comment %} {% endif %} {% endcomment %}
+
+{% if comment_count %}
+<hr>
+<div class="comments">
+    {% render_comment_list for object %}
+</div>
+{% endif %}
 {% endblock content%}

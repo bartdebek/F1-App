@@ -7,8 +7,7 @@
 
 <div class="container text-center">
     <div class="row">
-        <div class="col-8">
-            <div class="card mb-3 mx-auto" style="width: 20rem;">
+            <div class="card mb-3 mx-auto" style="max-width: 40rem">
                 <img src="{{driver.photo.url}}" class="card-img-top" alt="{{ driver }}">
                 <div class="card-body">
                     <h5 class="card-title" align="center">{{ driver }}</h5>
@@ -18,21 +17,28 @@
                         <a href="{{ team.get_absolute_url }}"><img class="small-team-logo" src="{{ team.logo.url }}"></a>
                         {% endfor %}
                     </p>
-                    <div class="card-footer" align="center">
-                        <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
-                        {% if driver.date_of_death %}
-                        <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
-                        {% else %}
-                        <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
-                        {% endif %}
-                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">F1 Championships: {{ driver.number_of_championships }} </li>
+                      {% if driver.date_of_death %}
+                      <li class="list-group-item">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }}</li>
+                      {% else %}
+                      <li class="list-group-item">Age: {{ driver.get_age }} </li>
+                      {% endif %}
+                      {% if driver.active %}
+                      <li class="list-group-item">Points this season: {{ driver.total_points|floatformat:"-1" }} (<a href="{% url 'driver_classification' %}">Classification</a>)</li>
+                      {% endif %}
+                      <li class="list-group-item">Total wins in F1: {{ driver.number_of_wins }}</li>
+                      <li class="list-group-item">Total F1 races: {{ driver.total_races }}</li>
+                      <li class="list-group-item">Total F1 podiums: {{ driver.total_podiums }}</li>
+                      <li class="list-group-item">First F1 race date: {{ driver.first_race_date }}</li>
+                    </ul>                  
                 </div>
             </div>
             {% comment %} <div class="mb-3 mx-auto" style="width: 20rem;">
                 {% ratings object %}
             </div> {% endcomment %}
             {% if driver.twitter_handle %}
-            <div class="mb-3 mx-auto" style="width: 20rem;">
+            <div class="mb-3 mx-auto" style="max-width: 40rem">
             <h3 align="center">Latest tweets</h3>
             <ul class="list-group">
                     {% for tweet in driver.tweet_list %}
@@ -53,7 +59,6 @@
               </ul>
             </div>
               {% endif %}
-        </div>
     </div>
 </div>
 {% get_comment_count for object as comment_count %}
