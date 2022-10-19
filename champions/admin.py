@@ -32,6 +32,7 @@ class SeasonResultsModelAdmin(admin.ModelAdmin):
     list_display = ('driver', 'team', 'date_updated', 'points')
     list_editable = ('points',)
     list_display_links = ('driver', 'team')
+    ordering = ['-points',]
 
 
 

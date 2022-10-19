@@ -25,7 +25,11 @@
                       <li class="list-group-item">Age: {{ driver.get_age }} </li>
                       {% endif %}
                       {% if driver.active %}
-                      <li class="list-group-item">Points this season: {{ driver.total_points|floatformat:"-1" }} (<a href="{% url 'driver_classification' %}">Classification</a>)</li>
+                      <li class="list-group-item">Points this season: {{ driver.total_points|floatformat:"-1" }} 
+                        <a href="{% url 'driver_classification' %}">
+                          <button type="button" class="btn btn-info" href="{% url 'driver_classification' %}">Check classification</button>
+                        </a>
+                      </li>
                       {% endif %}
                       <li class="list-group-item">Total wins in F1: {{ driver.number_of_wins }}</li>
                       <li class="list-group-item">Total F1 races: {{ driver.total_races }}</li>
