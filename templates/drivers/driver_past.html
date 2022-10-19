@@ -21,6 +21,10 @@
             </p>
             {% if driver.active %}    
             <h5 class="card-title" align="center"><a href="{% url 'driver_current' %}"><button type="button" class="btn btn-success">Active</button></a></h5>
+            {% elif not driver.active and driver.date_of_death %} 
+            <h5 class="card-title" align="center"><a href="{% url 'driver_past' %}"><button type="button" class="btn btn-dark">
+              Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} 
+            </button></a></h5>
             {% else %}
             <h5 class="card-title" align="center"><a href="{% url 'driver_past' %}"><button type="button" class="btn btn-danger">Retired</button></a></h5>
             {% endif %}
@@ -28,7 +32,6 @@
             <div class="card-footer" align="center">
               <small class="text-muted">F1 Championships: {{ driver.number_of_championships }} </small>
               {% if driver.date_of_death %}
-              <p><small class="text-muted">Died at the age of {{ driver.get_age }} on {{ driver.date_of_death }} </small></p>
               {% else %}
               <p><small class="text-muted">Age: {{ driver.get_age }} </small></p>
               {% endif %}
@@ -38,5 +41,45 @@
 
     {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
     {% endfor %}
+
+  {% if is_paginated %}
+
+    <nav aria-label="pagination">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            Previous
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>    
+        {% endif %}
+        <li class="page-item active" aria-current="page">
+
+          <span class="page-link">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+        </li>
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Last</span>
+        </li>
+        {% endif %}
+      </span>
+      
+  {% endif %}
 
 {% endblock content%}

@@ -34,5 +34,45 @@
     {%  if forloop.counter|divisibleby:3 or forloop.last %}</div><br>{%  endif %}
     {% endfor %}
 
+  {% if is_paginated %}
+
+    <nav aria-label="pagination">
+      <ul class="pagination justify-content-center">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
+            Previous
+          </a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Previous</span>
+        </li>    
+        {% endif %}
+        <li class="page-item active" aria-current="page">
+
+          <span class="page-link">
+              Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+          </span>
+        </li>
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Last</a>
+        </li>
+        {% else %}
+        <li class="page-item disabled">
+          <span class="page-link">Next</span>
+        </li>
+        <li class="page-item disabled">
+          <span class="page-link">Last</span>
+        </li>
+        {% endif %}
+      </span>
+      
+  {% endif %}
+
 {% endblock content%}
 

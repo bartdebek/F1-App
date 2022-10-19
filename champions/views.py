@@ -19,8 +19,9 @@ class AboutPageView(TemplateView):
 class DriversListView(ListView):
     model = Driver
     context_object_name = 'driver_list'
-    queryset = Driver.objects.order_by('-number_of_championships','-active')
+    queryset = Driver.objects.order_by('team__name','-number_of_championships','-active')
     template_name = 'drivers/driver_list.html'
+    paginate_by = 10
 
 
 class DriversDetailView(DetailView):
@@ -37,6 +38,7 @@ class DriversListCurrentView(ListView):
     context_object_name = 'driver_list_current'
     queryset = Driver.objects.filter(active=True).order_by('last_name')
     template_name = 'drivers/driver_current.html'
+    paginate_by = 10
 
 
 class DriversListPastView(ListView):
@@ -44,6 +46,7 @@ class DriversListPastView(ListView):
     context_object_name = 'driver_list_past'
     queryset = Driver.objects.filter(active=False)
     template_name = 'drivers/driver_past.html'
+    paginate_by = 10
 
 
 class DriverRatingsView(ListView):
@@ -51,6 +54,7 @@ class DriverRatingsView(ListView):
     queryset = Driver.objects.order_by('-ratings__average', '-number_of_championships')
     context_object_name = 'driver_list'
     template_name = 'drivers/driver_ratings.html'
+    paginate_by = 10
 
 
 class DriversClassificationView(ListView):
@@ -67,6 +71,7 @@ class TeamsListView(ListView):
     queryset = Team.objects.order_by('-active','-number_of_championships')
     context_object_name = 'team_list'
     template_name = 'teams/team_list.html'
+    paginate_by = 10
 
 
 class TeamsDetailView(DetailView):
@@ -84,6 +89,7 @@ class TeamsListCurrentView(ListView):
     context_object_name = 'team_list'
     queryset = Team.objects.filter(active=True)
     template_name = 'teams/team_current.html'
+    paginate_by = 10
 
 
 class TeamsListPastView(ListView):
@@ -91,6 +97,7 @@ class TeamsListPastView(ListView):
     context_object_name = 'team_list'
     queryset = Team.objects.filter(active=False)
     template_name = 'teams/team_past.html'
+    paginate_by = 10
 
 
 class TeamRatingsView(ListView):
@@ -113,6 +120,7 @@ class SearchResultsListView(ListView):
     model = Driver
     context_object_name = 'driver_list'
     template_name = 'drivers/search_results.html'
+    paginate_by = 10
 
     def get_queryset(self):
         query = self.request.GET.get('q')
