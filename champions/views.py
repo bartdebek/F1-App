@@ -19,7 +19,7 @@ class AboutPageView(TemplateView):
 class DriversListView(ListView):
     model = Driver
     context_object_name = 'driver_list'
-    queryset = Driver.objects.order_by('team__name','-number_of_championships','-active')
+    queryset = Driver.objects.order_by('-number_of_championships',).distinct()
     template_name = 'drivers/driver_list.html'
     paginate_by = 10
 
@@ -44,7 +44,7 @@ class DriversListCurrentView(ListView):
 class DriversListPastView(ListView):
     model = Driver
     context_object_name = 'driver_list_past'
-    queryset = Driver.objects.filter(active=False)
+    queryset = Driver.objects.filter(active=False).order_by('-number_of_championships')
     template_name = 'drivers/driver_past.html'
     paginate_by = 10
 
