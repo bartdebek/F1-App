@@ -25,26 +25,28 @@
             {% if team.twitter_handle %}
             <div class="card mb-3 mx-auto" style="max-width: 40rem">
             <h3 align="center">Latest tweets</h3>
-            <ul class="list-group">
-                {% for tweet in team.tweet_list %}
-                <li class="list-group-item">
-                    <div id="tweet">
-                        <div class="tweet-container pt pb pr pl">
-                          <div class="tweet-content pt"><br><i><b>{{ tweet.text }}</b></i><br></div>
-                          <div class="date pt pb">{{ tweet.created_at }}</div>
-                    
-                          <div class="rl pt pb">
-                            <div class="retweets"><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
-                            <div class="likes"><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
-                          </div>
-                        </div>
-                      </div>
-                </li>
-                {% endfor %}
-              </ul>
+            <ul class="list-group-flush">
+              {% for tweet in team.tweet_list %}
+              <li class="list-group-item">
+                <ul class="list-group">
+                  <li class="list-group-item">
+                    <div><br><i><b>{{ tweet.text }}</b></i><br></div>
+                  </li>
+                  <li class="list-group-item">
+                    <div>{{ tweet.created_at }}</div>
+                  </li>
+                  <li class="list-group-item">
+                    <div>
+                      <div><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
+                      <div><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
+                    </div>
+                  </li>
+                </ul> 
+              </li>
+              {% endfor %}
+            </ul>
             </div>
             {% endif %}
-
     </div>
 </div>
 {% get_comment_count for object as comment_count %}

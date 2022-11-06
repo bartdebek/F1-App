@@ -26,9 +26,9 @@
                       {% endif %}
                       {% if driver.active %}
                       <li class="list-group-item">Points this season: {{ driver.total_points|floatformat:"-1" }} 
-                        <a href="{% url 'driver_classification' %}">
+                        <p><a href="{% url 'driver_classification' %}">
                           <button type="button" class="btn btn-info" href="{% url 'driver_classification' %}">Check classification</button>
-                        </a>
+                        </a></p>
                       </li>
                       {% endif %}
                       <li class="list-group-item">Total wins in F1: {{ driver.number_of_wins }}</li>
@@ -44,20 +44,23 @@
             {% if driver.twitter_handle %}
             <div class="mb-3 mx-auto" style="max-width: 40rem">
             <h3 align="center">Latest tweets</h3>
-            <ul class="list-group">
+            <ul class="list-group-flush">
                     {% for tweet in driver.tweet_list %}
                 <li class="list-group-item">
-                    <div>
-                        <div>
-                          <div><br><i><b>{{ tweet.text }}</b></i><br></div>
-                          <div>{{ tweet.created_at }}</div>
-                    
-                          <div>
-                            <div><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
-                            <div><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
-                          </div>
-                        </div>
+                  <ul class="list-group">
+                    <li class="list-group-item">
+                      <div><br><i><b>{{ tweet.text }}</b></i><br></div>
+                    </li>
+                    <li class="list-group-item">
+                      <div>{{ tweet.created_at }}</div>
+                    </li>
+                    <li class="list-group-item">
+                      <div>
+                        <div><b>{{ tweet.public_metrics.retweet_count }}</b> Retweets</div>
+                        <div><b>{{ tweet.public_metrics.like_count }}</b> Likes</div>
                       </div>
+                    </li>
+                  </ul> 
                 </li>
                 {% endfor %}
               </ul>

@@ -19,9 +19,9 @@ class AboutPageView(TemplateView):
 class DriversListView(ListView):
     model = Driver
     context_object_name = 'driver_list'
-    queryset = Driver.objects.order_by('team__name','-number_of_championships','-active')
+    queryset = Driver.objects.order_by('-number_of_championships',).distinct()
     template_name = 'drivers/driver_list.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class DriversDetailView(DetailView):
@@ -38,15 +38,15 @@ class DriversListCurrentView(ListView):
     context_object_name = 'driver_list_current'
     queryset = Driver.objects.filter(active=True).order_by('last_name')
     template_name = 'drivers/driver_current.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class DriversListPastView(ListView):
     model = Driver
     context_object_name = 'driver_list_past'
-    queryset = Driver.objects.filter(active=False)
+    queryset = Driver.objects.filter(active=False).order_by('-number_of_championships')
     template_name = 'drivers/driver_past.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class DriverRatingsView(ListView):
@@ -54,7 +54,7 @@ class DriverRatingsView(ListView):
     queryset = Driver.objects.order_by('-ratings__average', '-number_of_championships')
     context_object_name = 'driver_list'
     template_name = 'drivers/driver_ratings.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class DriversClassificationView(ListView):
@@ -71,7 +71,7 @@ class TeamsListView(ListView):
     queryset = Team.objects.order_by('-active','-number_of_championships')
     context_object_name = 'team_list'
     template_name = 'teams/team_list.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class TeamsDetailView(DetailView):
@@ -89,7 +89,7 @@ class TeamsListCurrentView(ListView):
     context_object_name = 'team_list'
     queryset = Team.objects.filter(active=True)
     template_name = 'teams/team_current.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class TeamsListPastView(ListView):
@@ -97,7 +97,7 @@ class TeamsListPastView(ListView):
     context_object_name = 'team_list'
     queryset = Team.objects.filter(active=False)
     template_name = 'teams/team_past.html'
-    paginate_by = 10
+    paginate_by = 9
 
 
 class TeamRatingsView(ListView):
