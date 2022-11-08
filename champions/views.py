@@ -1,4 +1,3 @@
-from django.shortcuts import get_object_or_404
 from django.db.models import Sum, Q
 from django.views.generic import (
     ListView, 
@@ -6,7 +5,7 @@ from django.views.generic import (
     DetailView,
 )
 
-from .models import Driver, SeasonResults, Team
+from .models import Driver, Team
 from star_ratings.models import UserRating
 
 

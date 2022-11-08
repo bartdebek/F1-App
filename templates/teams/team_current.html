@@ -13,7 +13,7 @@
     <div class="card">
         <a href="{{ team.get_absolute_url }}"><img src="{{team.logo.url}}" class="img-thumbnail" alt="{{ team }}"></a>
         <h5 class="card-title" align="center">{{ team }}</h5>
-        <h5 class="card-title" align="center">Country: {{ team.country}} <img class="small-logo" src="{{ team.get_flag.url}}"></h5>
+        <h5 class="card-title" align="center">Country: {{ team.country}} <img class="small-flag" src="{{ team.get_flag.url}}"></h5>
         {% if team.active %}
         <h5 class="card-title" align="center"><a href="{% url 'team_current' %}"><button type="button" class="btn btn-success">Active</button></a></h5>
         {% else %}
