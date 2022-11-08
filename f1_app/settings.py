@@ -10,10 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 
-from email.policy import default
 from pathlib import Path
 from environs import Env
-from decouple import config
 
 env = Env()
 env.read_env()
@@ -52,6 +50,7 @@ INSTALLED_APPS = [
     'django_comments_xtd',
     'django_comments',
     'storages',
+    'environs',
     # LOCAL
     'champions.apps.ChampionsConfig',
     'accounts.apps.AccountsConfig',
