@@ -12,7 +12,7 @@
 
     <div class="col-sm-4">
     <div class="card">
-        <a href="{{ driver.get_absolute_url }}"><img src="{{driver.photo.url}}" class="img-thumbnail" alt="{{ driver }}"></a>
+        <a href="{{ driver.get_absolute_url }}"><img src="{{driver.get_thumbnail}}" class="img-thumbnail" alt="{{ driver }}"></a>
         <h5 class="card-title" align="center">{{ driver }}</h5>
         <h5 class="card-title" align="center">{{ driver.nationality }} <img class="small-flag" src="{{ driver.get_flag.url}}"></h5>
         <p>
