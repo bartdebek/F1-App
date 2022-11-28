@@ -1,8 +1,5 @@
 import uuid
-from PIL import Image
-from io import BytesIO
 from datetime import date, timedelta
-from django.core.files import File
 from django.contrib.contenttypes.fields import GenericRelation
 from django.db import models
 from django.urls import reverse
@@ -35,7 +32,6 @@ class Team(models.Model):
     wikipedia_link = models.URLField(max_length=200)
     twitter_handle = models.CharField(max_length=20,blank=True,null=True)
     logo = models.ImageField(upload_to='images/logos/')
-    thumbnail = models.ImageField(upload_to='images/logos/', blank=True, null=True)
     country = models.ForeignKey(Country,on_delete=models.CASCADE)
     number_of_championships = models.PositiveIntegerField(default=0)
     number_of_wins = models.PositiveIntegerField(default=0)
@@ -71,28 +67,6 @@ class Team(models.Model):
                                     )
         return tweets.data
 
-    def get_thumbnail(self):
-        if self.thumbnail:
-            return 'http://127.0.0.1:8000/' + self.thumbnail.url
-        else:
-            if self.logo:
-                self.thumbnail = self.make_thumbnail(self.logo)
-                self.save()
-                return 'http://127.0.0.1:8000/' + self.thumbnail.url
-            else:
-                return ''
-
-    def make_thumbnail(self, logo, heigth=200):
-        img = Image.open(self.logo)
-        hpercent = (heigth/float(img.size[1]))
-        wsize = int((float(img.size[0])*float(hpercent)))
-        img = img.resize((wsize,heigth), Image.Resampling.LANCZOS)
-        thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG')
-        thumbnail = File(thumb_io, name=self.logo.name)
-        return thumbnail
-
-
     
 class Driver(models.Model):
     uuid = models.UUIDField(
@@ -105,7 +79,6 @@ class Driver(models.Model):
     wikipedia_link = models.URLField(max_length=200)
     twitter_handle = models.CharField(max_length=20,null=True,blank=True)
     photo = models.ImageField(upload_to='images/drivers/')
-    thumbnail = models.ImageField(upload_to='images/drivers/', blank=True, null=True)
     nationality = models.ForeignKey(Country,on_delete=models.CASCADE)
     team = models.ManyToManyField(Team)
     number_of_championships = models.PositiveIntegerField(default=0)
@@ -149,27 +122,6 @@ class Driver(models.Model):
                                         max_results=5, 
                                         tweet_fields=['created_at','public_metrics'],)
         return tweets.data
-
-    def get_thumbnail(self):
-        if self.thumbnail:
-            return 'http://127.0.0.1:8000/' + self.thumbnail.url
-        else:
-            if self.photo:
-                self.thumbnail = self.make_thumbnail(self.photo)
-                self.save()
-                return 'http://127.0.0.1:8000/' + self.thumbnail.url
-            else:
-                return ''
-
-    def make_thumbnail(self, photo, heigth=200):
-        img = Image.open(self.photo)
-        hpercent = (heigth/float(img.size[1]))
-        wsize = int((float(img.size[0])*float(hpercent)))
-        img = img.resize((wsize,heigth), Image.Resampling.LANCZOS)
-        thumb_io = BytesIO()
-        img.save(thumb_io, 'JPEG')
-        thumbnail = File(thumb_io, name=self.photo.name)
-        return thumbnail
 
 
 class SeasonResults(models.Model):
