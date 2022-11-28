@@ -11,7 +11,7 @@
 
       <div class="col-sm-4">
         <div class="card">
-            <a href="{{ team.get_absolute_url }}"><img src="{{team.get_thumbnail}}" class="img-thumbnail" alt="{{ team }}"></a>
+            <a href="{{ team.get_absolute_url }}"><img src="{{team.logo.url}}" class="img-thumbnail" alt="{{ team }}"></a>
             <h5 class="card-title" align="center">{{ team }}</h5>
             <h5 class="card-title" align="center">{{ team.country }} <img class="small-flag" src="{{ team.get_flag.url}}"></h5>
             {% ratings team %}
