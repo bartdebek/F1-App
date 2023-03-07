@@ -3,10 +3,6 @@
 
 This is a project of Django powered web app containing database of F1 drivers and teams.
 
-# Live demo 
-
-Live demo: https://f1companion.herokuapp.com/
-
 # Functionality
 
 User has the ability to:
